@@ -1,0 +1,55 @@
+# How to use this file
+# This is a sample profiles.yml with most of the values filled in
+# to use it, replace the << capitalized variables >> with data unique to you.
+# for example: << YOUREMAIL >>@keystonestrategy should become atestuser@keystonestrategy.com
+# filled in with your email address
+credentials: &credentials
+  account: << SNOWFLAKE ACCOUNT >>
+  user: << YOUREMAIL >>@keystonestrategy.com
+
+dev_schema: &dev-schema
+  schema: dev_<< YOURINITIALS >>
+
+# Only change below this line if you know what you're doing
+# =========================================================
+# NOTE: you need to have the roles in order for the different 
+# profiles to work. 
+
+mtx_datapipeline_covid_iqvia_symphony_veeva_data_models:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake 
+      # More information for the options in this file
+      # can be found here: https://docs.getdbt.com/dbt-cli/configure-your-profile
+      <<: *credentials 
+      <<: *dev-schema
+
+      authenticator: externalbrowser 
+      role: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_TRANSFORMER 
+      warehouse: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_TRANSFORMER_WH
+      database: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_DEV
+      threads: 8
+
+    prod:
+      type: snowflake 
+      <<: *credentials
+
+      authenticator: externalbrowser 
+      role: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_DEPLOYER 
+      warehouse: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_DEPLOYER_WH
+      database: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA
+      schema: ANALYTICS
+      threads: 8
+
+    admin:
+      type: snowflake 
+      <<: *credentials 
+
+      account: keystone-projects
+      authenticator: externalbrowser 
+      role: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_ADMIN 
+      warehouse: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA_ADMIN_WH
+      database: MTX_DATAPIPELINE_COVID_IQVIA_SYMPHONY_VEEVA
+      schema: ANALYTICS
+      threads: 8
