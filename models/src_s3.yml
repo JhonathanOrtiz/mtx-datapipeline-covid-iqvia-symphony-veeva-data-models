@@ -1,0 +1,185 @@
+# Place here the source document and the section that describe the source
+
+version: 2
+
+sources:
+  - name: mtx_datapipeline_covid_iqvia_symphony_veeva
+    database: mtx_datapipeline_covid_iqvia_symphony_veeva_raw
+    schema: data
+    description: |
+      MTX Covid data shared by modeling team
+    loader: s3
+    tables:
+      - name: iqvia_covid_unadjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/iqvia/unadjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: symphony_covid_unadjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/symphony/unadjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: veeva_covid_unadjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/veeva/unadjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: iqvia_covid_adjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/iqvia/adjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: symphony_covid_adjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/symphony/adjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: veeva_covid_adjusted_retail
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/veeva/adjusted_retail/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: market
+            data_type: varchar
+          - name: nvx
+            data_type: varchar
+          - name: pfe
+            data_type: varchar
+          - name: mrna
+            data_type: varchar
+          - name: sample_type
+            data_type: varchar
+
+      - name: cdc_all_admin_doses_2022
+        description: |
+          ''
+        external:
+          location: "@mtx_datapipeline_covid_iqvia_symphony_veeva_raw.data.mtx_data_iqvia_symphony_veeva_external_data/all_admin_doses/"
+          file_format: |
+            (type = CSV skip_header = 1, field_delimiter=',')
+            on_error = 'continue'
+          pattern: .*\.csv
+          snowpipe:
+            autoload: false
+
+        columns:
+          - name: date
+            data_type: varchar
+          - name: admin_doses
+            data_type: varchar
